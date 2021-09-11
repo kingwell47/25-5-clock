@@ -1,0 +1,58 @@
+:root {
+  --darkSienna: hsl(351, 58%, 9%);
+  --rubyRed: hsl(350, 96%, 33%);
+  --roseEbony: hsl(350, 15%, 38%);
+  --lavenderBlush: hsl(349, 46%, 93%);
+  --ultraRed: hsl(349, 71%, 69%);
+
+  --color-bg: var(--darkSienna);
+  --color-100: var(--lavenderBlush);
+  --color-200: var(--ultraRed);
+  --color-300: var(--roseEbony);
+  --color-400: var(--rubyRed);
+
+  --font: "Unica One", cursive;
+}
+
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+  font-family: var(--font);
+  color: var(--color-100);
+  font-size: 2rem;
+}
+
+.main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: var(--color-400);
+}
