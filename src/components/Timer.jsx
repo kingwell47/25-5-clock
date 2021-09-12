@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+
 /* 
 
 Adapted from Florin Pop's countdown timer
@@ -15,9 +16,20 @@ https://www.youtube.com/watch?v=NAx76xx40jM
 
 function Timer(props) {
   const [totalTime, setTotalTime] = useState(props.time * 60);
-  const [timerMinutes, setTimerMinutes] = useState(props.time);
-  const [timerSeconds, setTimerSeconds] = useState("00");
+  // const [timerMinutes, setTimerMinutes] = useState(props.time);
+  // const [timerSeconds, setTimerSeconds] = useState("00");
   const { countingDown, setCountingDown } = props.counting;
+  const timerMinutes = useRef(props.time);
+  const timerSeconds = useRef("00");
+
+  const playAudio = () => {
+    let audio = document.getElementById("beep");
+    audio.play();
+  };
+  const pauseAudio = () => {
+    let audio = document.getElementById("beep");
+    audio.load();
+  };
 
   const handleStart = () => {
     setCountingDown(!countingDown); //Toggle the countdown
@@ -27,6 +39,7 @@ function Timer(props) {
     //handle resetting everything
     props.resetBtn();
     refresh(); //update the timer to latest time;
+    pauseAudio();
   };
 
   // Update the timer every time prop.time is changed
@@ -34,13 +47,16 @@ function Timer(props) {
     let minutes = props.time;
     minutes = minutes < 10 ? "0" + minutes : minutes;
     setTotalTime(props.time * 60);
-    setTimerMinutes(minutes);
-    setTimerSeconds("00");
+    timerMinutes.current = minutes;
+    timerSeconds.current = "00";
   }, [props.time]);
 
   // UseEffect to do updates
   useEffect(() => {
     let interval = setInterval(() => {
+      if (totalTime === 0) {
+        playAudio();
+      }
       if (!countingDown) {
         return; // If the timer is not active, do nothing
       }
@@ -51,7 +67,7 @@ function Timer(props) {
         props.switchOver(); //Switchover to the other timer
         refresh(); // update the timer again
       }
-    }, 1000); // 1 second intervals
+    }, 250); // 1 second intervals
     return () => clearInterval(interval);
   });
 
@@ -60,8 +76,8 @@ function Timer(props) {
     setTotalTime(props.time * 60);
     let minutes = props.time;
     minutes = minutes < 10 ? "0" + minutes : minutes;
-    setTimerMinutes(minutes);
-    setTimerSeconds("00");
+    timerMinutes.current = minutes;
+    timerSeconds.current = "00";
   };
 
   //This is the actual counting down function
@@ -70,8 +86,8 @@ function Timer(props) {
     let seconds = totalTime % 60;
     seconds = seconds < 10 ? "0" + seconds : seconds; //Formatting the seconds and minutes
     minutes = minutes < 10 ? "0" + minutes : minutes;
-    setTimerMinutes(minutes);
-    setTimerSeconds(seconds);
+    timerMinutes.current = minutes;
+    timerSeconds.current = seconds;
     setTotalTime(totalTime - 1);
   };
 
@@ -81,7 +97,7 @@ function Timer(props) {
         {props.id}
       </h2>
       <p className='text' id='time-left'>
-        {timerMinutes}:{timerSeconds}
+        {timerMinutes.current}:{timerSeconds.current}
       </p>
       <button className='button' id='start_stop' onClick={() => handleStart()}>
         Play/Pause

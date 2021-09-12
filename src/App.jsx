@@ -18,18 +18,8 @@ function App() {
 
   let audio = document.getElementById("beep");
 
-  const playAudio = () => {
-    let audio = document.getElementById("beep");
-    audio.play();
-  };
-  const pauseAudio = () => {
-    let audio = document.getElementById("beep");
-    audio.pause();
-  };
-
   const handleSwitchOver = () => {
     setSessionActive(!sessionActive);
-    playAudio();
   };
 
   const handleReset = () => {
@@ -37,7 +27,6 @@ function App() {
     setSessionTime(initial.sessionTime);
     setSessionActive(true);
     setCountingDown(false);
-    pauseAudio();
   };
 
   return (
