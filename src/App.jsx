@@ -4,6 +4,7 @@ import Display from "./components/Display";
 import Timer from "./components/Timer";
 import takeABreak from "./audio/break.wav";
 import backToWork from "./audio/work.wav";
+import cardDraw from "./audio/card.mp3";
 
 const initial = {
   breakTime: 5,
@@ -16,9 +17,15 @@ function App() {
   const [sessionActive, setSessionActive] = useState(true);
   const [countingDown, setCountingDown] = useState(false);
 
-  let audio = document.getElementById("beep");
+  const takeBreak = new Audio(takeABreak);
+  const backWork = new Audio(backToWork);
 
   const handleSwitchOver = () => {
+    if (sessionActive) {
+      takeBreak.play();
+    } else {
+      backWork.play();
+    }
     setSessionActive(!sessionActive);
   };
 
@@ -32,7 +39,7 @@ function App() {
   return (
     <div className='App'>
       <h1>25 + 5 Clock</h1>
-      <audio src={sessionActive ? backToWork : takeABreak} id='beep'></audio>
+      <audio src={cardDraw} id='beep'></audio>
       <Display
         id='break'
         time={breakTime}

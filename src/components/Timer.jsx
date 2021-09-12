@@ -28,11 +28,14 @@ function Timer(props) {
   };
   const pauseAudio = () => {
     let audio = document.getElementById("beep");
+    audio.pause();
     audio.load();
   };
 
   const handleStart = () => {
-    setTotalTime(totalTime - 1); //Immediately decrement the count at start!
+    if (totalTime === props.time * 60) {
+      setTotalTime(totalTime - 1); //Immediately decrement the count at start!
+    }
     setCountingDown(!countingDown); //Toggle the countdown
   };
 
@@ -58,7 +61,7 @@ function Timer(props) {
       if (!countingDown) {
         return; // If the timer is not active, do nothing
       }
-      if (totalTime === 0) {
+      if (totalTime <= 0) {
         playAudio(); // Play Audio when time is up
       }
       if (countingDown && totalTime >= 0) {
