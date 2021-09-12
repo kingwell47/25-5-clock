@@ -32,6 +32,7 @@ function Timer(props) {
   };
 
   const handleStart = () => {
+    setTotalTime(totalTime - 1); //Immediately decrement the count at start!
     setCountingDown(!countingDown); //Toggle the countdown
   };
 
@@ -54,11 +55,11 @@ function Timer(props) {
   // UseEffect to do updates
   useEffect(() => {
     let interval = setInterval(() => {
-      if (totalTime === 0) {
-        playAudio();
-      }
       if (!countingDown) {
         return; // If the timer is not active, do nothing
+      }
+      if (totalTime === 0) {
+        playAudio(); // Play Audio when time is up
       }
       if (countingDown && totalTime >= 0) {
         //Countdown only until zero
@@ -67,7 +68,7 @@ function Timer(props) {
         props.switchOver(); //Switchover to the other timer
         refresh(); // update the timer again
       }
-    }, 250); // 1 second intervals
+    }, 1000); // 1 second intervals
     return () => clearInterval(interval);
   });
 
