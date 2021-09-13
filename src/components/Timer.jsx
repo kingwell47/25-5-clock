@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-
 /* 
 
 Adapted from Florin Pop's countdown timer
@@ -21,6 +20,7 @@ function Timer(props) {
   const { countingDown, setCountingDown } = props.counting;
   const timerMinutes = useRef(props.time);
   const timerSeconds = useRef("00");
+  const alert = useRef(false);
 
   const playAudio = () => {
     let audio = document.getElementById("beep");
@@ -44,6 +44,7 @@ function Timer(props) {
     props.resetBtn();
     refresh(); //update the timer to latest time;
     pauseAudio();
+    alert.current = false;
   };
 
   // Update the timer every time prop.time is changed
@@ -58,6 +59,11 @@ function Timer(props) {
   // UseEffect to do updates
   useEffect(() => {
     let interval = setInterval(() => {
+      if (timerMinutes.current === "00") {
+        alert.current = true;
+      } else {
+        alert.current = false;
+      }
       if (!countingDown) {
         return; // If the timer is not active, do nothing
       }
@@ -97,17 +103,36 @@ function Timer(props) {
 
   return (
     <section className={props.id + "-timer"}>
-      <h2 className='header' id='timer-label'>
-        {props.id}
-      </h2>
-      <p className='text' id='time-left'>
-        {timerMinutes.current}:{timerSeconds.current}
-      </p>
-      <button className='button' id='start_stop' onClick={() => handleStart()}>
-        Play/Pause
+      <button
+        className='button-top'
+        id='start_stop'
+        onClick={() => handleStart()}>
+        P
+        <svg>
+          <path
+            id='rect2277'
+            d='m20 10c0.97-5 2.911-10 9.702-10 6.792 0 12.128 5 9.703 15-2.426 10-13.584 15-19.405 25-5.821-10-16.979-15-19.405-25-2.4254-10 2.9109-15 9.703-15 6.791 0 8.732 5 9.702 10z'
+            fill='#A5031E'
+          />
+        </svg>
       </button>
-      <button className='button' id='reset' onClick={() => resetTimer()}>
-        Reset
+      <div className={alert.current ? "text-wrapper alert" : "text-wrapper"}>
+        <p className='text' id='time-left'>
+          {timerMinutes.current}:{timerSeconds.current}
+        </p>
+        <h2 className='header' id='timer-label'>
+          {props.id}
+        </h2>
+      </div>
+      <button className='button-bottom' id='reset' onClick={() => resetTimer()}>
+        <svg>
+          <path
+            id='rect2277'
+            d='m20 10c0.97-5 2.911-10 9.702-10 6.792 0 12.128 5 9.703 15-2.426 10-13.584 15-19.405 25-5.821-10-16.979-15-19.405-25-2.4254-10 2.9109-15 9.703-15 6.791 0 8.732 5 9.702 10z'
+            fill='#A5031E'
+          />
+        </svg>
+        R
       </button>
     </section>
   );

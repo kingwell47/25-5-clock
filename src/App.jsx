@@ -21,15 +21,18 @@ function App() {
   const backWork = new Audio(backToWork);
 
   const handleSwitchOver = () => {
+    //Handle Switching over to another timer
     if (sessionActive) {
+      //Play Audio depending on what's active
       takeBreak.play();
     } else {
       backWork.play();
     }
-    setSessionActive(!sessionActive);
+    setSessionActive(!sessionActive); //Toggle Session active
   };
 
   const handleReset = () => {
+    //Reset the timer back to initial 25 + 5 Settings
     setBreakTime(initial.breakTime);
     setSessionTime(initial.sessionTime);
     setSessionActive(true);
@@ -37,28 +40,30 @@ function App() {
   };
 
   return (
-    <div className='App'>
+    <div className='app'>
       <h1>25 + 5 Clock</h1>
       <audio src={cardDraw} id='beep'></audio>
-      <Display
-        id='break'
-        time={breakTime}
-        handler={setBreakTime}
-        counting={countingDown}
-      />
-      <Display
-        id='session'
-        time={sessionTime}
-        handler={setSessionTime}
-        counting={countingDown}
-      />
-      <Timer
-        id={sessionActive ? "session" : "break"}
-        time={sessionActive ? sessionTime : breakTime}
-        counting={{ countingDown, setCountingDown }}
-        resetBtn={handleReset}
-        switchOver={handleSwitchOver}
-      />
+      <div className='display_wrapper'>
+        <Display
+          id='session'
+          time={sessionTime}
+          handler={setSessionTime}
+          counting={countingDown} // Pass down status if counting down or not
+        />
+        <Timer //Switch Items Depending on if session is active
+          id={sessionActive ? "session" : "break"}
+          time={sessionActive ? sessionTime : breakTime}
+          counting={{ countingDown, setCountingDown }} // Pass down status if counting down or not, passing down the setter also allows the timer to change the status
+          resetBtn={handleReset}
+          switchOver={handleSwitchOver}
+        />
+        <Display
+          id='break'
+          time={breakTime}
+          handler={setBreakTime}
+          counting={countingDown} // Pass down status if counting down or not
+        />
+      </div>
     </div>
   );
 }
