@@ -99,8 +99,8 @@ I also don't think this is the most efficient code ever, it probably needs a lot
 
 - [Florin Pop's Countdown Timer](https://www.youtube.com/watch?v=x7WJEmxNlEs) - The first tutorial I watched.
 - [Uzoanya Dominic's Countdown Timer](https://www.youtube.com/watch?v=ZVOGPvo08zM) - Another tutorial that gave me some ideas on what to do.
-- [CSSgradient.io](https://cssgradient.io/gradient-backgrounds/) - Great resource for gradients.
 - [Coding Entrepreneurs' Timer Tutorial](https://www.youtube.com/watch?v=NAx76xx40jM) - This one finally got me going on how to pause and start the countdown.
+- [Uberduck.ai](https://uberduck.ai) - Great resource for synthesized voices.
 
 ## Author
 
