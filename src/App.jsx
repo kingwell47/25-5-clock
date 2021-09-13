@@ -64,19 +64,26 @@ function App() {
           counting={countingDown} // Pass down status if counting down or not
         />
       </div>
-      <br />
-      <p className='foot'>
-        <a
-          href='https://github.com/kingwell47/25-5-clock'
-          rel='noreferrer'
-          target='_blank'>
-          Coded{" "}
-        </a>
-        by{" "}
-        <a href='https://www.kingwell47.com' rel='noreferrer' target='_blank'>
-          Joel P. Doctor
-        </a>
-      </p>
+      <div className='foot'>
+        <p>
+          <a
+            href='https://github.com/kingwell47/25-5-clock'
+            rel='noreferrer'
+            target='_blank'>
+            Coded{" "}
+          </a>
+          by{" "}
+          <a href='https://www.kingwell47.com' rel='noreferrer' target='_blank'>
+            Joel P. Doctor
+          </a>
+        </p>
+        <p>
+          Voice Synthesis from{" "}
+          <a href='https://uberduck.ai' rel='noreferrer' target='_blank'>
+            Uberduck.ai
+          </a>
+        </p>
+      </div>
     </div>
   );
 }
