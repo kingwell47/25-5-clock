@@ -4,6 +4,7 @@
   --roseEbony: hsl(350, 15%, 38%);
   --lavenderBlush: hsl(349, 46%, 93%);
   --ultraRed: hsl(349, 71%, 69%);
+  --joker: hsl(318, 49%, 11%);
 
   --color-bg: var(--darkSienna);
   --color-100: var(--lavenderBlush);
@@ -28,7 +29,12 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--color-bg);
+  background: rgb(42, 14, 34);
+  background: linear-gradient(
+    332deg,
+    rgba(42, 14, 34, 1) 0%,
+    rgba(36, 10, 14, 1) 100%
+  );
   font-family: var(--font);
   color: var(--color-100);
   font-size: 2rem;

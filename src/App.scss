@@ -2,13 +2,29 @@
 
 .app {
   display: flex;
+  height: 100%;
   flex-direction: column;
-  justify-items: center;
+  justify-content: center;
   align-items: center;
+
+  .foot {
+    font-size: 1.5rem;
+    a {
+      transition: color 350ms ease-in-out;
+      &:hover {
+        color: orange;
+      }
+    }
+  }
+}
+
+.hidden {
+  display: none;
 }
 
 .display_wrapper {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
@@ -96,6 +112,13 @@ button {
     svg {
       transform: rotate(-90deg);
     }
+
+    &.active {
+      color: orange;
+      svg path {
+        fill: orange;
+      }
+    }
   }
 
   .button-bottom {
@@ -113,6 +136,10 @@ button {
     &.alert {
       background-color: var(--color-400);
       color: var(--color-100);
+    }
+
+    img {
+      width: 5rem;
     }
   }
 }

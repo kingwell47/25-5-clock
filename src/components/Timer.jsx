@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import jester from "../icons/foolhat.svg";
+
 /* 
 
 Adapted from Florin Pop's countdown timer
@@ -21,6 +23,7 @@ function Timer(props) {
   const timerMinutes = useRef(props.time);
   const timerSeconds = useRef("00");
   const alert = useRef(false);
+  const switching = useRef(false);
 
   const playAudio = () => {
     let audio = document.getElementById("beep");
@@ -74,8 +77,12 @@ function Timer(props) {
         //Countdown only until zero
         doIntervalChange();
       } else {
+        switching.current = true;
         props.switchOver(); //Switchover to the other timer
         refresh(); // update the timer again
+        setInterval(() => {
+          switching.current = false;
+        }, 4500);
       }
     }, 1000); // 1 second intervals
     return () => clearInterval(interval);
@@ -104,19 +111,19 @@ function Timer(props) {
   return (
     <section className={props.id + "-timer"}>
       <button
-        className='button-top'
+        className={countingDown ? "button-top active" : "button-top"}
         id='start_stop'
         onClick={() => handleStart()}>
         P
         <svg>
           <path
-            id='rect2277'
             d='m20 10c0.97-5 2.911-10 9.702-10 6.792 0 12.128 5 9.703 15-2.426 10-13.584 15-19.405 25-5.821-10-16.979-15-19.405-25-2.4254-10 2.9109-15 9.703-15 6.791 0 8.732 5 9.702 10z'
             fill='#A5031E'
           />
         </svg>
       </button>
       <div className={alert.current ? "text-wrapper alert" : "text-wrapper"}>
+        {switching.current && <img src={jester} alt='' />}
         <p className='text' id='time-left'>
           {timerMinutes.current}:{timerSeconds.current}
         </p>
@@ -127,7 +134,6 @@ function Timer(props) {
       <button className='button-bottom' id='reset' onClick={() => resetTimer()}>
         <svg>
           <path
-            id='rect2277'
             d='m20 10c0.97-5 2.911-10 9.702-10 6.792 0 12.128 5 9.703 15-2.426 10-13.584 15-19.405 25-5.821-10-16.979-15-19.405-25-2.4254-10 2.9109-15 9.703-15 6.791 0 8.732 5 9.702 10z'
             fill='#A5031E'
           />
