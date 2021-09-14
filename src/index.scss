@@ -16,6 +16,7 @@
 }
 
 html {
+  height: 100%;
   font-size: 100%;
   box-sizing: border-box;
 }
@@ -27,6 +28,11 @@ html {
 }
 
 body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   margin: 0;
   padding: 0;
   background: rgb(42, 14, 34);
@@ -38,11 +44,15 @@ body {
   font-family: var(--font);
   color: var(--color-100);
   font-size: 2rem;
+
+  @media (min-width: 45em) {
+    justify-content: center;
+  }
 }
 
 .main {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
