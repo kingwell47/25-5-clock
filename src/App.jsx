@@ -73,7 +73,7 @@ function App() {
             Coded{" "}
           </a>
           by{" "}
-          <a href='https://www.kingwell47.com' rel='noreferrer' target='_blank'>
+          <a href='https://www.joeldoctor.com' rel='noreferrer' target='_blank'>
             Joel P. Doctor
           </a>
         </p>
